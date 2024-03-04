@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Course {
+abstract class Course {
     String ostad;
     String dars;
     int [] emtahan = new int[7];
@@ -9,4 +9,13 @@ public class Course {
     int vahed;
     HashMap <String , Integer[]> time;
 
+    public Course() {
+        this.ostad = ostad;
+        this.dars = dars;
+        this.emtahan = emtahan;
+        this.code = code;
+        this.zarfiat = zarfiat;
+        this.vahed = vahed;
+        this.time = time;
+    }
 }
