@@ -9,7 +9,7 @@ abstract class Course {
     int vahed;
     HashMap <String , Integer[]> time;
 
-    public Course() {
+    public Course(String ostad, String dars, int[] emtahan, int code, int zarfiat, int vahed, HashMap<String, Integer[]> time) {
         this.ostad = ostad;
         this.dars = dars;
         this.emtahan = emtahan;
