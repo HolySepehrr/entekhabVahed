@@ -1,5 +1,4 @@
-public class User {
-    private User(){}
+abstract class User {
     String Username;
     String password;
 }
