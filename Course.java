@@ -1,6 +1,8 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 abstract class Course {
     String ostad;
@@ -13,18 +15,19 @@ abstract class Course {
     int code;
     int zarfiat;
     int vahed;
-    HashMap<String, LocalTime[]> time = new HashMap<>();
+    HashMap<String, LocalTime[]> time;
 
     public void Course(String roz , String Shorouemtahan , String Payanemtahan){
 
     }
 
-    public HashMap<String , LocalTime[]> tabdil (String rooz , String shorokelas , String payankelas){
+    public void tabdil (String rooz , String shorokelas , String payankelas){
+
         LocalTime[] set = new LocalTime[2];
         set[0] = LocalTime.parse(shorokelas);
         set[1] = LocalTime.parse(payankelas);
-        time.put(rooz,set);
-        return time;
+
+        time.put(rooz, set);
     }
     public Course(String ostad, String dars, String tarikhemtahan, String Shorouemtahan, String Payanemtahan, int code, int zarfiat, int vahed,String type) {
         this.ostad = ostad;
@@ -37,6 +40,7 @@ abstract class Course {
         this.zarfiat = zarfiat;
         this.vahed = vahed;
         this.Type=type;
+        this.time = new HashMap<>();
     }
 
     public HashMap<String, LocalTime[]> getTime() {
@@ -57,8 +61,12 @@ abstract class Course {
     public void Tostring(){
         System.out.println("Course name: \""+this.dars+"\"");
         System.out.println("Course teacher: \""+this.ostad+"\"");
-        System.out.println("Course class time: \""+this.time+"\"");
-        System.out.println("Course exam time: \""+this.tarikhemtahan+"\""+"\""+this.timeemtahan+"\"");
+        String t = "";
+        for (Map.Entry<String, LocalTime[]> entry : time.entrySet()){
+            t += entry.getKey() + ": " + Arrays.toString(entry.getValue()) + "\t";
+        }
+        System.out.println("Course class time: \""+t+"\"");
+        System.out.println("Course exam time: \""+this.tarikhemtahan+"\""+"\""+ Arrays.toString(this.timeemtahan) +"\"");
         System.out.println("Course type : \""+this.Type+"\"");
         System.out.println("Course lesson capacity: \""+this.zarfiat+"\"");
         System.out.println("Course units: \""+this.vahed+"\"");
