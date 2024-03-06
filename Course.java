@@ -10,11 +10,19 @@ abstract class Course {
     String dars;
     String tarikhemtahan;
 
+    public int getTedaddaaneshjoo() {
+        return tedaddaaneshjoo;
+    }
+
+    public void setTedaddaaneshjoo(int tedaddaaneshjoo) {
+        this.tedaddaaneshjoo = tedaddaaneshjoo;
+    }
 
     LocalTime[] timeemtahan;
     int code;
     int zarfiat;
     int vahed;
+    int tedaddaaneshjoo;
     HashMap<String, LocalTime[]> time;
 
     public void Course(String roz , String Shorouemtahan , String Payanemtahan){
