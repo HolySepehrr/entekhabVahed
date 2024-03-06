@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 abstract class Course {
@@ -6,6 +7,8 @@ abstract class Course {
     String Type;
     String dars;
     String tarikhemtahan;
+
+
     LocalTime[] timeemtahan;
     int code;
     int zarfiat;
@@ -50,5 +53,16 @@ abstract class Course {
 
     public void setType(String type) {
         Type = type;
+    }
+    public void Tostring(){
+        System.out.println("Course name: \""+this.dars+"\"");
+        System.out.println("Course teacher: \""+this.ostad+"\"");
+        System.out.println("Course class time: \""+this.time+"\"");
+        System.out.println("Course exam time: \""+this.tarikhemtahan+"\""+"\""+this.timeemtahan+"\"");
+        System.out.println("Course type : \""+this.Type+"\"");
+        System.out.println("Course lesson capacity: \""+this.zarfiat+"\"");
+        System.out.println("Course units: \""+this.vahed+"\"");
+        System.out.println("Course Lesson code: \""+this.code+"\"");
+        System.out.println();
     }
 }
