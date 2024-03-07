@@ -1,6 +1,7 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 public class CLI {
@@ -186,12 +187,12 @@ public class CLI {
                                             System.out.println("2.my courses");
                                             System.out.println("3.Add course");
                                             System.out.println("4.Delete course");
-                                            System.out.println("0.back");
+                                            System.out.println("0.exit");
 
 
                                             String input5 = sc.nextLine();
                                             if (input5.equals("0")) {
-                                                continue d;
+                                                continue a;
                                             }
 
 
@@ -217,14 +218,15 @@ public class CLI {
                                                     }
                                                     for (int i = 0; i < course.size(); i++) {
                                                         if (input6.equals(Integer.toString(course.get(i).code))) {
-                                                            boolean a1 = false, a2 = false, a3 = false, a4 = true;
-                                                            int d = student1.getVahed() + course.get(i).code;
+                                                            Course course1 = course.get(i);
+                                                            boolean a1 = false, a2 = false, a3 = false;
+                                                            int d = student1.getVahed() + course.get(i).vahed;
                                                             if (d <= 20) {
                                                                 a1 = true;
                                                             } else {
                                                                 System.out.println("Units cannot exceed 20");
                                                             }
-                                                            int e = student1.getGeneralvahed() + course.get(i).code;
+                                                            int e = student1.getGeneralvahed() + course.get(i).vahed;
                                                             if (course.get(i).Type.equals("Professional") || e <= 5) {
                                                                 a2 = true;
                                                             } else {
@@ -236,22 +238,42 @@ public class CLI {
                                                                 System.out.println("No capacity!");
                                                             }
                                                             for (int j = 0; j < student1.courses.size(); j++) {
-                                                                if (input6.equals(Integer.toString(student1.courses.get(i).code))) {
-                                                                    a4 = false;
+                                                                if (input6.equals(Integer.toString(student1.courses.get(j).code))) {
                                                                     System.out.println("Course has already been taken");
+                                                                    continue e;
                                                                 }
                                                             }
 
-                                                            if (a1 && a2 && a3 && a4) {
+                                                            for (int j = 0; j < student1.courses.size(); j++) {
+                                                                for (String Day : student1.courses.get(j).time.keySet()) {
+                                                                    for (String compDay : course1.time.keySet()) {
+                                                                        if (Day.equals(compDay)) {
+                                                                            if ((student1.courses.get(j).ToStringTime(Day, 0) <= course1.ToStringTime(compDay, 1) &&
+                                                                                    student1.courses.get(j).ToStringTime(Day, 0) >= course1.ToStringTime(compDay, 0)) ||
+                                                                                    (student1.courses.get(j).ToStringTime(Day, 1) >= course1.ToStringTime(compDay, 0) &&
+                                                                                            student1.courses.get(j).ToStringTime(Day, 0) <= course1.ToStringTime(compDay, 1))) {
+                                                                                System.out.println("ridi kaka, tadakhol dare");
+                                                                                System.out.println();
+                                                                                            continue e;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+
+                                                            if (a1 && a2 && a3) {
                                                                 ArrayList<Course> f = student1.courses;
                                                                 f.add(course.get(i));
                                                                 student1.setCourses(f);
                                                                 student1.setVahed(d);
-                                                                if (course.get(i).Type.equals("Professional")) {
+                                                                if (course.get(i).Type.equals("General")) {
                                                                     student1.setGeneralvahed(e);
                                                                 }
                                                                 int r = course.get(i).getTedaddaaneshjoo() + 1;
                                                                 course.get(i).setTedaddaaneshjoo(r);
+                                                                course.get(i).getCoursesStudent().add(student1);
+                                                                System.out.println("Course taken successfully!");
                                                                 continue e;
                                                             } else {
                                                                 System.out.println("you can't take this course!");
@@ -275,12 +297,15 @@ public class CLI {
                                                         if (input6.equals(Integer.toString(student1.courses.get(i).code))) {
                                                             int f = student1.getVahed() - student1.courses.get(i).vahed;
                                                             student1.setVahed(f);
+                                                            Course course1 = course.get(student1.courses.get(i).code);
                                                             f = student1.courses.get(i).vahed;
                                                             if (student1.courses.get(i).Type.equals("General")) {
                                                                 f = student1.getGeneralvahed() - f;
                                                                 student1.setGeneralvahed(f);
                                                             }
                                                             student1.courses.remove(i);
+                                                            course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() - 1);
+                                                            course1.coursesStudent.remove(student1);
                                                             System.out.println("done!");
                                                             continue e;
 
@@ -356,8 +381,8 @@ public class CLI {
                         b:
                         while (true) {
                             System.out.println("1.add Course");
-                            System.out.println(" ");
-                            System.out.println("0.back");
+                            System.out.println("2.see courses list");
+                            System.out.println("0.exit");
                             String input3 = sc.nextLine();
                             if (input3.equals("0")) {
                                 continue a;
@@ -442,7 +467,7 @@ public class CLI {
                                                                     System.out.println("Enter the Course capacity");
                                                                     System.out.println("1.back to first menu");
                                                                     System.out.println("0.back");
-                                                                    int zarfiat = 0;
+                                                                    int zarfiat = 10;
                                                                     try {
                                                                         zarfiat = sc.nextInt();
                                                                     } catch (Exception e) {
@@ -459,7 +484,7 @@ public class CLI {
                                                                         System.out.println("Enter the Course units");
                                                                         System.out.println("1.back to first menu");
                                                                         System.out.println("0.back");
-                                                                        int vahed = 0;
+                                                                        int vahed = 10;
                                                                         try {
                                                                             vahed = sc.nextInt();
                                                                         } catch (Exception e) {
@@ -473,66 +498,442 @@ public class CLI {
                                                                         }
                                                                         k:
                                                                         while (true) {
-                                                                            System.out.println("Enter the Course code");
-                                                                            System.out.println("1.back to first menu");
-                                                                            System.out.println("0.back");
-                                                                            int code = 0;
-                                                                            try {
-                                                                                code = sc.nextInt();
-                                                                            } catch (Exception e) {
-                                                                                System.out.println("Enter a number");
+                                                                            Random rnd = new Random();
+                                                                            int code = rnd.nextInt(9000) + 1000;
+                                                                            for (Course course1 : course) {
+                                                                                if (course1.code == code) {
+                                                                                    continue k;
+                                                                                }
                                                                             }
-                                                                            if (code == 0) {
-                                                                                continue j;
-                                                                            }
-                                                                            if (code == 1) {
-                                                                                continue b;
-                                                                            }
-                                                                            //roz o saat kelaso nagereftam hanooz
+                                                                            l:
+                                                                            while (true) {
 
-//                                                                            while (true) {
-//                                                                                System.out.println("Select Course type");
-//                                                                                System.out.println("1.GeneraL");
-//                                                                                System.out.println("2.Professional");
-//                                                                                System.out.println("3.back to first menu");
-//                                                                                System.out.println("0.back");
-//                                                                                String type = sc.nextLine();
-//                                                                                if (type.equals("0")) {
-//                                                                                    continue k;
-//                                                                                }
-//                                                                                if (type.equals("3")) {
-//                                                                                    continue b;
-//                                                                                }
-//                                                                                if (type.equals("1")) {
-//                                                                                    General name = new General(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
-//                                                                                    name.tabdil("shanbe", "08:00", "10:00");
-//                                                                                    name.tabdil("doshanbe", "08:00", "10:00");
-//                                                                                } else {
-//                                                                                    System.out.println("Invalid Command");
-//                                                                                }
-//                                                                            }
 
+                                                                                m:
+                                                                                while (true) {
+                                                                                    System.out.println("How many days a week is the class held?");
+                                                                                    System.out.println("1.back to first menu");
+                                                                                    System.out.println("2.one day");
+                                                                                    System.out.println("3.two days");
+                                                                                    System.out.println("0.back");
+                                                                                    int adad = 10;
+                                                                                    try {
+                                                                                        adad = sc.nextInt();
+                                                                                    } catch (Exception e) {
+                                                                                        System.out.println("Enter a number");
+                                                                                        continue m;
+                                                                                    }
+                                                                                    if (adad == 0) {
+                                                                                        continue l;
+                                                                                    }
+                                                                                    if (adad == 1) {
+                                                                                        continue b;
+                                                                                    }
+                                                                                    if (adad > 3 || adad < 1) {
+                                                                                        System.out.println("Enter a right number");
+                                                                                        continue m;
+                                                                                    }
+                                                                                    if (adad == 2) {
+
+                                                                                        n:
+                                                                                        while (true) {
+                                                                                            System.out.println("What day will the class be held?");
+                                                                                            System.out.println("1.back to first menu");
+                                                                                            System.out.println("0.back");
+                                                                                            String roz = sc.next();
+
+                                                                                            if (roz.equals("0")) {
+                                                                                                continue m;
+                                                                                            }
+                                                                                            else if (roz.equals("1")) {
+                                                                                                continue b;
+                                                                                            }
+                                                                                            o:
+                                                                                            while (true) {
+                                                                                                System.out.println("Enter the class start time. example: \"08:30\"");
+                                                                                                System.out.println("1.back to first menu");
+                                                                                                System.out.println("0.back");
+                                                                                                String start = sc.nextLine();
+                                                                                                if (start.equals("0")) {
+                                                                                                    continue n;
+                                                                                                }
+                                                                                                if (start.equals("1")) {
+                                                                                                    continue b;
+                                                                                                }
+                                                                                                p:
+                                                                                                while (true) {
+                                                                                                    System.out.println("Enter the class end time. example: \"10:30\"");
+                                                                                                    System.out.println("1.back to first menu");
+                                                                                                    System.out.println("0.back");
+                                                                                                    String end = sc.nextLine();
+                                                                                                    if (end.equals("0")) {
+                                                                                                        continue o;
+                                                                                                    }
+                                                                                                    if (end.equals("1")) {
+                                                                                                        continue b;
+                                                                                                    }
+
+                                                                                                    while (true) {
+                                                                                                        System.out.println("Select Course type");
+                                                                                                        System.out.println("1.GeneraL");
+                                                                                                        System.out.println("2.Professional");
+                                                                                                        System.out.println("3.back to first menu");
+                                                                                                        System.out.println("0.back");
+                                                                                                        String type = sc.nextLine();
+                                                                                                        if (type.equals("0")) {
+                                                                                                            continue p;
+                                                                                                        }
+                                                                                                        if (type.equals("3")) {
+                                                                                                            continue b;
+                                                                                                        }
+                                                                                                        if (type.equals("1")) {
+                                                                                                            General name = new General(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
+                                                                                                            name.tabdil(roz, start, end);
+                                                                                                            course.add(name);
+                                                                                                            college1.generals.add(name);
+                                                                                                            System.out.println("Add course completed");
+                                                                                                            continue b;
+                                                                                                        } else if (type.equals("2")) {
+                                                                                                            Professional name = new Professional(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
+                                                                                                            name.tabdil(roz, start, end);
+                                                                                                            course.add(name);
+                                                                                                            college1.professionals.add(name);
+                                                                                                            System.out.println("Add course completed");
+                                                                                                            continue b;
+                                                                                                        } else {
+                                                                                                            System.out.println("Invalid Command");
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                    if (adad == 3) {
+                                                                                        n:
+                                                                                        while (true) {
+                                                                                            System.out.println("Enter the first day");
+                                                                                            System.out.println("1.back to first menu");
+                                                                                            System.out.println("0.back");
+                                                                                            String roz = sc.nextLine();
+                                                                                            if (roz.equals("0")) {
+                                                                                                continue m;
+                                                                                            }
+                                                                                            if (roz.equals("1")) {
+                                                                                                continue b;
+                                                                                            }
+                                                                                            o:
+                                                                                            while (true) {
+                                                                                                System.out.println("Enter the usual " + roz + "'s class start time. example: \"08:30\"");
+                                                                                                System.out.println("1.back to first menu");
+                                                                                                System.out.println("0.back");
+                                                                                                String start = sc.nextLine();
+                                                                                                if (start.equals("0")) {
+                                                                                                    continue n;
+                                                                                                }
+                                                                                                if (start.equals("1")) {
+                                                                                                    continue b;
+                                                                                                }
+                                                                                                p:
+                                                                                                while (true) {
+                                                                                                    System.out.println("Enter the usual " + roz + "'s class end time. example: \"10:30\"");
+                                                                                                    System.out.println("1.back to first menu");
+                                                                                                    System.out.println("0.back");
+                                                                                                    String end = sc.nextLine();
+                                                                                                    if (end.equals("0")) {
+                                                                                                        continue o;
+                                                                                                    }
+                                                                                                    if (end.equals("1")) {
+                                                                                                        continue b;
+                                                                                                    }
+
+                                                                                                    q:
+                                                                                                    while (true) {
+                                                                                                        System.out.println("Enter the second day");
+                                                                                                        System.out.println("1.back to first menu");
+                                                                                                        System.out.println("0.back");
+                                                                                                        String roz1 = sc.next();
+                                                                                                        if (roz1.equals("0")) {
+                                                                                                            continue p;
+                                                                                                        }
+                                                                                                        if (roz1.equals("1")) {
+                                                                                                            continue b;
+                                                                                                        }
+                                                                                                        r:
+                                                                                                        while (true) {
+                                                                                                            System.out.println("Enter the usual " + roz1 + "'s class start time. example: \"08:30\"");
+                                                                                                            System.out.println("1.back to first menu");
+                                                                                                            System.out.println("0.back");
+                                                                                                            String start1 = sc.nextLine();
+                                                                                                            if (start1.equals("0")) {
+                                                                                                                continue q;
+                                                                                                            }
+                                                                                                            if (start1.equals("1")) {
+                                                                                                                continue b;
+                                                                                                            }
+                                                                                                            s:
+                                                                                                            while (true) {
+                                                                                                                System.out.println("Enter the usual " + roz1 + "'s class end time. example: \"10:30\"");
+                                                                                                                System.out.println("1.back to first menu");
+                                                                                                                System.out.println("0.back");
+                                                                                                                String end1 = sc.nextLine();
+                                                                                                                if (end1.equals("0")) {
+                                                                                                                    continue r;
+                                                                                                                }
+                                                                                                                if (end1.equals("1")) {
+                                                                                                                    continue b;
+                                                                                                                }
+                                                                                                                while (true) {
+                                                                                                                    System.out.println("Select Course type");
+                                                                                                                    System.out.println("1.GeneraL");
+                                                                                                                    System.out.println("2.Professional");
+                                                                                                                    System.out.println("3.back to first menu");
+                                                                                                                    System.out.println("0.back");
+                                                                                                                    String type = sc.nextLine();
+                                                                                                                    if (type.equals("0")) {
+                                                                                                                        continue s;
+                                                                                                                    }
+                                                                                                                    if (type.equals("3")) {
+                                                                                                                        continue b;
+                                                                                                                    }
+                                                                                                                    if (type.equals("1")) {
+                                                                                                                        General name = new General(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
+                                                                                                                        name.tabdil(roz, start, end);
+                                                                                                                        name.tabdil(roz1, start1, end1);
+                                                                                                                        course.add(name);
+                                                                                                                        college1.generals.add(name);
+                                                                                                                        System.out.println("Add course complited");
+                                                                                                                        continue b;
+
+                                                                                                                    } else if (type.equals("2")) {
+                                                                                                                        Professional name = new Professional(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
+                                                                                                                        name.tabdil(roz, start, end);
+                                                                                                                        name.tabdil(roz1, start1, end1);
+                                                                                                                        course.add(name);
+                                                                                                                        college1.professionals.add(name);
+
+                                                                                                                        System.out.println("Add course completed");
+                                                                                                                        continue b;
+                                                                                                                    } else {
+                                                                                                                        System.out.println("Invalid Command");
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
                                                                         }
                                                                     }
-
                                                                 }
                                                             }
-
                                                         }
-
                                                     }
                                                 }
-
-
                                             }
                                         }
                                     }
+                                }
+                            } else if (input3.equals("2")) {
+                                c:
+                                while (true) {
+                                    System.out.println("Select a Department");
+                                    System.out.println("1.Math");
+                                    System.out.println("2.Physics");
+                                    System.out.println("3.Chemistry");
+                                    System.out.println("4.Zabanha");
+                                    System.out.println("0.back");
+                                    String input4 = sc.nextLine();
+                                    if (input4.equals("0")) {
+                                        continue b;
+                                    }
+                                    for (int i = 1; i < 5; i++) {
+                                        if (input4.equals(i + "")) {
+                                            College college1 = college.get(i - 1);
+                                            college1.Tostring();
+                                            d:
+                                            while (true) {
+                                                System.out.println("");
+                                                System.out.println("");
+                                                System.out.println("");
 
+                                                System.out.println("2.Add capacity");
+                                                System.out.println("3.Add a student to a course");
+                                                System.out.println("4.Remove the student from the course");
+                                                System.out.println("1.back to first menu");
+                                                System.out.println("0.back");
+                                                String input5 = sc.nextLine();
+                                                if (input5.equals("0")) {
+                                                    continue c;
+                                                }
+                                                if (input5.equals("1")) {
+                                                    continue b;
+                                                }
+                                                if (input5.equals("2") || input5.equals("3") || input5.equals("4")) {
+                                                    e:
+                                                    while (true) {
+                                                        System.out.println("Enter the lesson code");
+                                                        System.out.println("1.back to first menu");
+                                                        System.out.println("0.back");
+                                                        String input6 = sc.next();
+                                                        if (input6.equals("0")) {
+                                                            continue d;
+                                                        }
+                                                        if (input6.equals("1")) {
+                                                            continue b;
+                                                        }
+                                                        boolean fp = false;
+                                                        for (int j = 0; j < course.size(); j++) {
+                                                            if (input6.equals(Integer.toString(course.get(i).code))) {
+                                                                Course course1 = course.get(i);
+                                                                fp=true;
+
+
+                                                                if (input5.equals("2")) {
+                                                                    f:
+                                                                    while (true) {
+                                                                        System.out.println("Course lesson capacity: \"" + course1.zarfiat + "\"");
+                                                                        System.out.println("How much capacity do yo add?");
+                                                                        System.out.println("-1.back to first menu");
+                                                                        System.out.println("0.back");
+                                                                        int input7 = 10;
+
+                                                                        try {
+                                                                            input7 = sc.nextInt();
+                                                                        } catch (Exception e) {
+                                                                            System.out.println("Enter the number");
+                                                                            System.out.println();
+                                                                            continue f;
+                                                                        }
+                                                                        if (input7 == 0) {
+                                                                            continue e;
+                                                                        }
+                                                                        if (input7 == -1) {
+                                                                            continue b;
+                                                                        }
+                                                                        System.out.println("Capacity added");
+                                                                        course1.setZarfiat(course1.getZarfiat() + input7);
+                                                                        System.out.println("Course lesson new capacity: \"" + course1.zarfiat + "\"");
+                                                                        continue b;
+
+                                                                    }
+                                                                }
+
+
+                                                                if (input5.equals("4")) {
+                                                                    f:
+                                                                    while (true) {
+                                                                        System.out.println();
+                                                                        course1.Students();
+                                                                        System.out.println();
+                                                                        System.out.println("Enter the student's username");
+                                                                        System.out.println("1.back to first menu");
+                                                                        System.out.println("0.back");
+                                                                        String username = sc.nextLine();
+                                                                        if (username.equals("0")) {
+                                                                            continue e;
+                                                                        }
+                                                                        if (username.equals("1")) {
+                                                                            continue b;
+                                                                        }
+
+                                                                        for (int k = 0; k < course1.coursesStudent.size(); k++) {
+                                                                            if (course1.coursesStudent.get(k).Username.equals(username)) {
+                                                                                Student student = course1.coursesStudent.get(k);
+                                                                                course1.coursesStudent.remove(k);
+                                                                                student.courses.remove(course1);
+
+                                                                                int f = student.getVahed() - course1.coursesStudent.get(k).vahed;
+                                                                                student.setVahed(f);
+                                                                                f = course1.coursesStudent.get(k).vahed;
+                                                                                if (student.courses.get(k).Type.equals("General")) {
+                                                                                    f = student.getGeneralvahed() - f;
+                                                                                    student.setGeneralvahed(f);
+                                                                                }
+                                                                                course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() - 1);
+                                                                                System.out.println("done!");
+                                                                                continue b;
+
+
+                                                                            }
+                                                                        }
+                                                                        System.out.println("username id not found!");
+                                                                        continue f;
+
+                                                                    }
+                                                                }
+
+
+                                                                else  {
+                                                                    f:
+                                                                    while (true) {
+                                                                        System.out.println();
+                                                                        course1.Students();
+                                                                        System.out.println();
+                                                                        System.out.println("Enter the student's username");
+                                                                        System.out.println("1.back to first menu");
+                                                                        System.out.println("0.back");
+                                                                        String username = sc.nextLine();
+                                                                        if (username.equals("0")) {
+                                                                            continue e;
+                                                                        }
+                                                                        if (username.equals("1")) {
+                                                                            continue b;
+                                                                        }
+
+                                                                        boolean b = false;
+                                                                        Student student1 = new Student(null, null);
+                                                                        for (Student student : Students) {
+                                                                            if (student.getUsername().equals(username)) {
+                                                                                student1 = student;
+                                                                                b = true;
+                                                                                student1.courses.add(course1);
+                                                                                student1.setVahed(student1.getVahed()+course1.vahed);
+                                                                                if (course.get(i).Type.equals("General")) {
+                                                                                    student1.setGeneralvahed(student1.getGeneralvahed()+course1.vahed);
+                                                                                }
+                                                                                course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo()+1);
+                                                                                course1.coursesStudent.add(student1);
+                                                                            }
+                                                                        }
+                                                                        if (!b) {
+                                                                            System.out.println("Username is not found!");
+                                                                            System.out.println();
+                                                                            continue f;
+                                                                        } else {
+
+                                                                        }
+
+
+                                                                    }
+                                                                }
+
+
+                                                            }
+                                                        }if (fp){
+                                                            System.out.println("code is not correct!");
+                                                            continue e;
+                                                        }
+
+                                                    }
+
+                                                } else {
+                                                    System.out.println("Invalid input");
+                                                    continue d;
+                                                }
+                                            }
+                                        }
+                                        System.out.println("Invalid input");
+                                    }
 
                                 }
-
                             }
                         }
+
                     } else {
                         System.out.println("password is wrong");
                     }
