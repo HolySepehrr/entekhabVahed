@@ -110,6 +110,9 @@ abstract class Course {
         }
 
     }
+    public  void delete(){
+
+    }
 
     public int ToStringTime(String Day, int index) {
         return (time.get(Day)[index].getHour() * 100) + (time.get(Day)[index].getMinute());

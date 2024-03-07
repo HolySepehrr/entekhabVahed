@@ -254,7 +254,7 @@ public class CLI {
                                                                                             student1.courses.get(j).ToStringTime(Day, 0) <= course1.ToStringTime(compDay, 1))) {
                                                                                 System.out.println("ridi kaka, tadakhol dare");
                                                                                 System.out.println();
-                                                                                            continue e;
+                                                                                continue e;
                                                                             }
                                                                         }
                                                                     }
@@ -384,6 +384,9 @@ public class CLI {
                             System.out.println("2.see courses list");
                             System.out.println("0.exit");
                             String input3 = sc.nextLine();
+                            if (input3.equals("")){
+                                input3 = sc.nextLine();
+                            }
                             if (input3.equals("0")) {
                                 continue a;
                             } else if (input3.equals("1")) {
@@ -544,8 +547,7 @@ public class CLI {
 
                                                                                             if (roz.equals("0")) {
                                                                                                 continue m;
-                                                                                            }
-                                                                                            else if (roz.equals("1")) {
+                                                                                            } else if (roz.equals("1")) {
                                                                                                 continue b;
                                                                                             }
                                                                                             o:
@@ -592,6 +594,8 @@ public class CLI {
                                                                                                             course.add(name);
                                                                                                             college1.generals.add(name);
                                                                                                             System.out.println("Add course completed");
+                                                                                                            System.out.println("Course's code is :\""+code+"\"");
+
                                                                                                             continue b;
                                                                                                         } else if (type.equals("2")) {
                                                                                                             Professional name = new Professional(ostad, dars, ostad, shoro, tamom, code, zarfiat, vahed);
@@ -599,6 +603,7 @@ public class CLI {
                                                                                                             course.add(name);
                                                                                                             college1.professionals.add(name);
                                                                                                             System.out.println("Add course completed");
+                                                                                                            System.out.println("Course's code is :\""+code+"\"");
                                                                                                             continue b;
                                                                                                         } else {
                                                                                                             System.out.println("Invalid Command");
@@ -703,6 +708,7 @@ public class CLI {
                                                                                                                         course.add(name);
                                                                                                                         college1.generals.add(name);
                                                                                                                         System.out.println("Add course complited");
+                                                                                                                        System.out.println("Course's code is :\""+code+"\"");
                                                                                                                         continue b;
 
                                                                                                                     } else if (type.equals("2")) {
@@ -713,6 +719,7 @@ public class CLI {
                                                                                                                         college1.professionals.add(name);
 
                                                                                                                         System.out.println("Add course completed");
+                                                                                                                        System.out.println("Course's code is :\""+code+"\"");
                                                                                                                         continue b;
                                                                                                                     } else {
                                                                                                                         System.out.println("Invalid Command");
@@ -757,10 +764,9 @@ public class CLI {
                                             college1.Tostring();
                                             d:
                                             while (true) {
-                                                System.out.println("");
-                                                System.out.println("");
-                                                System.out.println("");
-
+                                                System.out.println();
+                                                System.out.println();
+                                                System.out.println();
                                                 System.out.println("2.Add capacity");
                                                 System.out.println("3.Add a student to a course");
                                                 System.out.println("4.Remove the student from the course");
@@ -786,11 +792,11 @@ public class CLI {
                                                         if (input6.equals("1")) {
                                                             continue b;
                                                         }
-                                                        boolean fp = false;
+                                                        int fp = 0;
                                                         for (int j = 0; j < course.size(); j++) {
-                                                            if (input6.equals(Integer.toString(course.get(i).code))) {
-                                                                Course course1 = course.get(i);
-                                                                fp=true;
+                                                            if (input6.equals(Integer.toString(course.get(j).code))) {
+                                                                Course course1 = course.get(j);
+                                                                fp=-1;
 
 
                                                                 if (input5.equals("2")) {
@@ -815,16 +821,15 @@ public class CLI {
                                                                         if (input7 == -1) {
                                                                             continue b;
                                                                         }
+                                                                        System.out.println();
                                                                         System.out.println("Capacity added");
                                                                         course1.setZarfiat(course1.getZarfiat() + input7);
                                                                         System.out.println("Course lesson new capacity: \"" + course1.zarfiat + "\"");
+                                                                        System.out.println();
                                                                         continue b;
 
                                                                     }
-                                                                }
-
-
-                                                                if (input5.equals("4")) {
+                                                                } else if (input5.equals("4")) {
                                                                     f:
                                                                     while (true) {
                                                                         System.out.println();
@@ -865,10 +870,7 @@ public class CLI {
                                                                         continue f;
 
                                                                     }
-                                                                }
-
-
-                                                                else  {
+                                                                } else {
                                                                     f:
                                                                     while (true) {
                                                                         System.out.println();
@@ -892,11 +894,11 @@ public class CLI {
                                                                                 student1 = student;
                                                                                 b = true;
                                                                                 student1.courses.add(course1);
-                                                                                student1.setVahed(student1.getVahed()+course1.vahed);
+                                                                                student1.setVahed(student1.getVahed() + course1.vahed);
                                                                                 if (course.get(i).Type.equals("General")) {
-                                                                                    student1.setGeneralvahed(student1.getGeneralvahed()+course1.vahed);
+                                                                                    student1.setGeneralvahed(student1.getGeneralvahed() + course1.vahed);
                                                                                 }
-                                                                                course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo()+1);
+                                                                                course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() + 1);
                                                                                 course1.coursesStudent.add(student1);
                                                                             }
                                                                         }
@@ -913,10 +915,13 @@ public class CLI {
                                                                 }
 
 
+                                                            } else {
+                                                                fp++;
                                                             }
-                                                        }if (fp){
-                                                            System.out.println("code is not correct!");
-                                                            continue e;
+                                                            if (fp == course.size()) {
+                                                                System.out.println("code is not correct!");
+                                                                continue e;
+                                                            }
                                                         }
 
                                                     }
@@ -931,6 +936,10 @@ public class CLI {
                                     }
 
                                 }
+                            }
+                            else {
+                                System.out.println("Invalid input");
+
                             }
                         }
 
