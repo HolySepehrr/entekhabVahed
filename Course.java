@@ -9,7 +9,7 @@ abstract class Course {
     String Type;
     String dars;
     String tarikhemtahan;
-    ArrayList<Student> coursesStudent=new ArrayList<>();
+    ArrayList<Student> coursesStudent = new ArrayList<>();
 
     public int getTedaddaaneshjoo() {
         return tedaddaaneshjoo;
@@ -34,9 +34,7 @@ abstract class Course {
     int tedaddaaneshjoo;
     HashMap<String, LocalTime[]> time;
 
-    public void Course(String roz, String Shorouemtahan, String Payanemtahan) {
 
-    }
 
     public void tabdil(String rooz, String shorokelas, String payankelas) {
 
@@ -96,21 +94,52 @@ abstract class Course {
         System.out.println("Course exam time: \"" + this.tarikhemtahan + "\"" + "\"" + Arrays.toString(this.timeemtahan) + "\"");
         System.out.println("Course type : \"" + this.Type + "\"");
         System.out.println("Course lesson capacity: \"" + this.zarfiat + "\"");
+        System.out.println("Student count: \"" + this.tedaddaaneshjoo + "\"");
         System.out.println("Course units: \"" + this.vahed + "\"");
         System.out.println("Course Lesson code: \"" + this.code + "\"");
         System.out.println();
     }
 
     public void Students() {
-        System.out.println("Students udername: ");
+        System.out.println("Students username: " );
 
         for (Student student : coursesStudent) {
 
-            System.out.print(student.Username + ", ");
+            System.out.print(student.Username + " \" ");
         }
 
     }
-    public  void delete(){
+
+    public void delete(Course course, int type, College college) {
+        System.out.println(12418 + 1894);
+        if (type == 1) {
+            System.out.println();
+            System.out.println("1");
+            System.out.println();
+            for (int i = 0; i < course.coursesStudent.size(); ) {
+                Student student = course.coursesStudent.get(i);
+                student.courses.remove(course);
+                student.setVahed(student.getVahed() - course.vahed);
+                student.setGeneralvahed(student.getGeneralvahed() - course.vahed);
+                course.coursesStudent.remove(i);
+            }
+            System.out.println("The lesson was successfully deleted!");
+            System.out.println();
+            college.generals.remove(course);
+        } else {
+            System.out.println();
+            System.out.println("2");
+            System.out.println();
+            for (int i = 0; i < course.coursesStudent.size(); ) {
+                Student student = course.coursesStudent.get(i);
+                student.courses.remove(course);
+                student.setVahed(student.getVahed() - course.vahed);
+                course.coursesStudent.remove(i);
+            }
+            System.out.println("The lesson was successfully deleted!");
+            System.out.println();
+            college.professionals.remove(course);
+        }
 
     }
 

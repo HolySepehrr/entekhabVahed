@@ -16,8 +16,8 @@ public class College {
         this.name = name;
     }
 
-    ArrayList<General> generals;
-    ArrayList<Professional> professionals;
+    public ArrayList<General> generals;
+    public ArrayList<Professional> professionals;
     String name;
 
     public void addcourse(Course course){
