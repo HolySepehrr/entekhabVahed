@@ -84,6 +84,7 @@ abstract class Course {
     }
 
     public void Tostring() {
+        System.out.println();
         System.out.println("Course name: \"" + this.dars + "\"");
         System.out.println("Course teacher: \"" + this.ostad + "\"");
         String t = "";
@@ -97,7 +98,7 @@ abstract class Course {
         System.out.println("Student count: \"" + this.tedaddaaneshjoo + "\"");
         System.out.println("Course units: \"" + this.vahed + "\"");
         System.out.println("Course Lesson code: \"" + this.code + "\"");
-        System.out.println();
+
     }
 
     public void Students() {
@@ -145,5 +146,8 @@ abstract class Course {
 
     public int ToStringTime(String Day, int index) {
         return (time.get(Day)[index].getHour() * 100) + (time.get(Day)[index].getMinute());
+    }
+    public int ToStringTimeemtahan( int index) {
+        return (timeemtahan[index].getHour() * 100) + (timeemtahan[index].getMinute());
     }
 }

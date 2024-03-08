@@ -135,6 +135,9 @@ public class CLI {
             System.out.println("1.student");
             System.out.println("2.admin");
             String input1 = sc.nextLine();
+            if (input1.equals("")) {
+                input1 = sc.nextLine();
+            }
             if (input1.equals("1")) {
                 boolean a = false, b = false;
                 String input2 = "";
@@ -145,6 +148,9 @@ public class CLI {
                         System.out.println("2.sign up");
                         System.out.println("0.back");
                         input2 = sc.nextLine();
+                        if (input2.equals("")) {
+                            input2 = sc.nextLine();
+                        }
                     }
                     if (input2.equals("1") || a) {
                         a = false;
@@ -154,6 +160,9 @@ public class CLI {
                             System.out.println("Enter your username");
                             System.out.println("0.back");
                             String input3 = sc.nextLine();
+                            if (input3.equals("")) {
+                                input3 = sc.nextLine();
+                            }
 
                             if (input3.equals("0")) {
                                 continue b;
@@ -166,7 +175,9 @@ public class CLI {
                                 }
                             }
                             if (!b) {
+                                System.out.println();
                                 System.out.println("your username is not found");
+                                System.out.println();
                                 continue c;
                             } else {
                                 d:
@@ -175,7 +186,11 @@ public class CLI {
                                     System.out.println("Enter your password");
                                     System.out.println("0.back");
                                     String input4 = sc.nextLine();
+                                    if (input4.equals("")) {
+                                        input4 = sc.nextLine();
+                                    }
                                     if (input4.equals("0")) {
+                                        b = false;
                                         continue c;
                                     }
 
@@ -191,6 +206,9 @@ public class CLI {
 
 
                                             String input5 = sc.nextLine();
+                                            if (input5.equals("")) {
+                                                input5 = sc.nextLine();
+                                            }
                                             if (input5.equals("0")) {
                                                 continue a;
                                             }
@@ -202,11 +220,23 @@ public class CLI {
                                                     System.out.println("Faculty of " + college1.getName() + ":");
                                                     college1.Tostring();
                                                 }
+                                                System.out.println();
                                             } else if (input5.equals("2")) {
+                                                boolean f = false;
+
                                                 for (int i = 0; i < student1.courses.size(); i++) {
+                                                    f = true;
                                                     Course course1 = student1.courses.get(i);
                                                     course1.Tostring();
+                                                    System.out.println("Course Type: \"" + course1.getType() + "\"");
                                                 }
+                                                if (!f) {
+                                                    System.out.println("you don't have any courses!");
+                                                    System.out.println();
+                                                } else {
+                                                    System.out.println();
+                                                }
+
                                             } else if (input5.equals("3")) {
                                                 while (true) {
                                                     System.out.println("Enter the lesson code");
@@ -248,10 +278,10 @@ public class CLI {
                                                                 for (String Day : student1.courses.get(j).time.keySet()) {
                                                                     for (String compDay : course1.time.keySet()) {
                                                                         if (Day.equals(compDay)) {
-                                                                            if ((student1.courses.get(j).ToStringTime(Day, 0) <= course1.ToStringTime(compDay, 1) &&
+                                                                            if ((student1.courses.get(j).ToStringTime(Day, 0) < course1.ToStringTime(compDay, 1) &&
                                                                                     student1.courses.get(j).ToStringTime(Day, 0) >= course1.ToStringTime(compDay, 0)) ||
-                                                                                    (student1.courses.get(j).ToStringTime(Day, 1) >= course1.ToStringTime(compDay, 0) &&
-                                                                                            student1.courses.get(j).ToStringTime(Day, 0) <= course1.ToStringTime(compDay, 1))) {
+                                                                                    (course1.ToStringTime(Day, 0) < student1.courses.get(j).ToStringTime(compDay, 1) &&
+                                                                                            course1.ToStringTime(Day, 0) >= student1.courses.get(j).ToStringTime(compDay, 0))) {
                                                                                 System.out.println("ridi kaka, tadakhol dare");
                                                                                 System.out.println();
                                                                                 continue e;
@@ -259,6 +289,21 @@ public class CLI {
                                                                         }
                                                                     }
                                                                 }
+                                                            }
+                                                            for (int j = 0; j < student1.courses.size(); j++) {
+                                                                if (course1.tarikhemtahan.equals(student1.courses.get(j).tarikhemtahan)) {
+                                                                    if ((student1.courses.get(j).ToStringTimeemtahan(0) < course1.ToStringTimeemtahan(1) &&
+                                                                            student1.courses.get(j).ToStringTimeemtahan(0) >= course1.ToStringTimeemtahan(0)) ||
+                                                                            (course1.ToStringTimeemtahan(0) < student1.courses.get(j).ToStringTimeemtahan(1) &&
+                                                                                    course1.ToStringTimeemtahan(0) >= student1.courses.get(j).ToStringTimeemtahan(0))
+                                                                    ) {
+                                                                        System.out.println("ridi kaka, tadakhol dare");
+                                                                        System.out.println();
+                                                                        continue e;
+                                                                    }
+                                                                }
+
+
                                                             }
 
 
@@ -283,33 +328,47 @@ public class CLI {
                                                         }
                                                     }
                                                     System.out.println("code is not correct!");
+                                                    System.out.println();
 
                                                 }
                                             } else if (input5.equals("4")) {
+                                                g:
                                                 while (true) {
                                                     System.out.println("Enter the lesson code");
                                                     System.out.println("0.back");
                                                     String input6 = sc.nextLine();
+                                                    if (input6.equals("")) {
+                                                        input6 = sc.nextLine();
+                                                    }
                                                     if (input6.equals("0")) {
                                                         continue e;
                                                     }
                                                     for (int i = 0; i < student1.courses.size(); i++) {
                                                         if (input6.equals(Integer.toString(student1.courses.get(i).code))) {
                                                             student1.setVahed(student1.getVahed() - student1.courses.get(i).vahed);
-                                                            Course course1 = course.get(student1.courses.get(i).code);
+                                                            Course course1 = student1.courses.get(i);
                                                             if (student1.courses.get(i).Type.equals("General")) {
-                                                                student1.setGeneralvahed(student1.getGeneralvahed()-student1.courses.get(i).vahed);
+                                                                student1.setGeneralvahed(student1.getGeneralvahed() - student1.courses.get(i).vahed);
                                                             }
                                                             student1.courses.remove(i);
                                                             course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() - 1);
                                                             course1.coursesStudent.remove(student1);
+                                                            student1.courses.remove(course1);
                                                             System.out.println("done!");
                                                             continue e;
 
 
                                                         }
+                                                        for (int j = 0; j < course.size(); j++) {
+                                                            if (input6.equals(course.get(j).code + "")) {
+                                                                System.out.println("you haven't chosen " + course.get(j).dars + " to remove it !");
+                                                                System.out.println();
+                                                                continue g;
+
+                                                            }
+                                                        }
                                                     }
-                                                    System.out.println("code ia nor correct");
+                                                    System.out.println("code is not correct");
 
                                                 }
 
@@ -333,6 +392,9 @@ public class CLI {
                             System.out.println("Enter your username");
                             System.out.println("0.back");
                             String input3 = sc.nextLine();
+                            if (input3.equals("")) {
+                                input3 = sc.nextLine();
+                            }
 
                             if (input3.equals("0")) {
                                 continue b;
@@ -347,6 +409,9 @@ public class CLI {
                             System.out.println("Enter your password");
                             System.out.println("0.back");
                             String input4 = sc.nextLine();
+                            if (input4.equals("")) {
+                                input4 = sc.nextLine();
+                            }
 
                             if (input4.equals("0")) {
                                 continue b;
@@ -371,6 +436,9 @@ public class CLI {
                     System.out.println("Enter your password");
                     System.out.println("0.back");
                     String input2 = sc.nextLine();
+                    if (input2.equals("")) {
+                        input2 = sc.nextLine();
+                    }
 
                     if (input2.equals("0")) {
                         continue a;
@@ -398,6 +466,9 @@ public class CLI {
                                     System.out.println("4.Zabanha");
                                     System.out.println("0.back");
                                     String input4 = sc.nextLine();
+                                    if (input4.equals("")) {
+                                        input4 = sc.nextLine();
+                                    }
                                     if (input4.equals("0")) {
                                         continue b;
                                     }
@@ -410,6 +481,9 @@ public class CLI {
                                                 System.out.println("1.back to first menu");
                                                 System.out.println("0.back");
                                                 String ostad = sc.nextLine();
+                                                if (ostad.equals("")) {
+                                                    ostad = sc.nextLine();
+                                                }
                                                 if (ostad.equals("0")) {
                                                     continue c;
                                                 }
@@ -422,6 +496,9 @@ public class CLI {
                                                     System.out.println("1.back to first menu");
                                                     System.out.println("0.back");
                                                     String dars = sc.nextLine();
+                                                    if (dars.equals("")) {
+                                                        dars = sc.nextLine();
+                                                    }
                                                     if (dars.equals("0")) {
                                                         continue d;
                                                     }
@@ -434,6 +511,9 @@ public class CLI {
                                                         System.out.println("1.back to first menu");
                                                         System.out.println("0.back");
                                                         String tarikh = sc.nextLine();
+                                                        if (tarikh.equals("")) {
+                                                            tarikh = sc.nextLine();
+                                                        }
                                                         if (tarikh.equals("0")) {
                                                             continue e;
                                                         }
@@ -446,6 +526,9 @@ public class CLI {
                                                             System.out.println("1.back to first menu");
                                                             System.out.println("0.back");
                                                             String shoro = sc.nextLine();
+                                                            if (shoro.equals("")) {
+                                                                shoro = sc.nextLine();
+                                                            }
                                                             if (shoro.equals("0")) {
                                                                 continue f;
                                                             }
@@ -458,6 +541,9 @@ public class CLI {
                                                                 System.out.println("1.back to first menu");
                                                                 System.out.println("0.back");
                                                                 String tamom = sc.nextLine();
+                                                                if (tamom.equals("")) {
+                                                                    tamom = sc.nextLine();
+                                                                }
                                                                 if (tamom.equals("0")) {
                                                                     continue g;
                                                                 }
@@ -466,36 +552,38 @@ public class CLI {
                                                                 }
                                                                 i:
                                                                 while (true) {
-                                                                    System.out.println("Enter the Course capacity");
-                                                                    System.out.println("1.back to first menu");
+                                                                    System.out.println("Enter the number of Course capacity");
+                                                                    System.out.println("-1.back to first menu");
                                                                     System.out.println("0.back");
                                                                     int zarfiat = 10;
                                                                     try {
                                                                         zarfiat = sc.nextInt();
                                                                     } catch (Exception e) {
                                                                         System.out.println("Enter a number");
+                                                                        continue i ;
                                                                     }
                                                                     if (zarfiat == 0) {
                                                                         continue h;
                                                                     }
-                                                                    if (zarfiat == 1) {
+                                                                    if (zarfiat == -1) {
                                                                         continue b;
                                                                     }
                                                                     j:
                                                                     while (true) {
-                                                                        System.out.println("Enter the Course units");
-                                                                        System.out.println("1.back to first menu");
+                                                                        System.out.println("Enter the number of Course units");
+                                                                        System.out.println("-1.back to first menu");
                                                                         System.out.println("0.back");
                                                                         int vahed = 10;
                                                                         try {
                                                                             vahed = sc.nextInt();
                                                                         } catch (Exception e) {
                                                                             System.out.println("Enter a number");
+                                                                            continue j;
                                                                         }
                                                                         if (vahed == 0) {
                                                                             continue i;
                                                                         }
-                                                                        if (vahed == 1) {
+                                                                        if (vahed == -1) {
                                                                             continue b;
                                                                         }
                                                                         k:
@@ -543,6 +631,9 @@ public class CLI {
                                                                                             System.out.println("1.back to first menu");
                                                                                             System.out.println("0.back");
                                                                                             String roz = sc.next();
+                                                                                            if (roz.equals("")) {
+                                                                                                roz = sc.nextLine();
+                                                                                            }
 
                                                                                             if (roz.equals("0")) {
                                                                                                 continue m;
@@ -555,8 +646,8 @@ public class CLI {
                                                                                                 System.out.println("1.back to first menu");
                                                                                                 System.out.println("0.back");
                                                                                                 String start = sc.nextLine();
-                                                                                                if (start.equals("")){
-                                                                                                    start=sc.nextLine();
+                                                                                                if (start.equals("")) {
+                                                                                                    start = sc.nextLine();
                                                                                                 }
                                                                                                 if (start.equals("0")) {
                                                                                                     continue n;
@@ -570,8 +661,8 @@ public class CLI {
                                                                                                     System.out.println("1.back to first menu");
                                                                                                     System.out.println("0.back");
                                                                                                     String end = sc.nextLine();
-                                                                                                    if (end.equals("")){
-                                                                                                        end=sc.nextLine();
+                                                                                                    if (end.equals("")) {
+                                                                                                        end = sc.nextLine();
                                                                                                     }
                                                                                                     if (end.equals("0")) {
                                                                                                         continue o;
@@ -587,6 +678,9 @@ public class CLI {
                                                                                                         System.out.println("3.back to first menu");
                                                                                                         System.out.println("0.back");
                                                                                                         String type = sc.nextLine();
+                                                                                                        if (type.equals("")) {
+                                                                                                            type = sc.nextLine();
+                                                                                                        }
                                                                                                         if (type.equals("0")) {
                                                                                                             continue p;
                                                                                                         }
@@ -626,6 +720,9 @@ public class CLI {
                                                                                             System.out.println("1.back to first menu");
                                                                                             System.out.println("0.back");
                                                                                             String roz = sc.nextLine();
+                                                                                            if (roz.equals("")) {
+                                                                                                roz = sc.nextLine();
+                                                                                            }
                                                                                             if (roz.equals("0")) {
                                                                                                 continue m;
                                                                                             }
@@ -638,8 +735,8 @@ public class CLI {
                                                                                                 System.out.println("1.back to first menu");
                                                                                                 System.out.println("0.back");
                                                                                                 String start = sc.nextLine();
-                                                                                                if (start.equals("")){
-                                                                                                    start=sc.nextLine();
+                                                                                                if (start.equals("")) {
+                                                                                                    start = sc.nextLine();
                                                                                                 }
                                                                                                 if (start.equals("0")) {
                                                                                                     continue n;
@@ -653,8 +750,8 @@ public class CLI {
                                                                                                     System.out.println("1.back to first menu");
                                                                                                     System.out.println("0.back");
                                                                                                     String end = sc.nextLine();
-                                                                                                    if (end.equals("")){
-                                                                                                        end=sc.nextLine();
+                                                                                                    if (end.equals("")) {
+                                                                                                        end = sc.nextLine();
                                                                                                     }
                                                                                                     if (end.equals("0")) {
                                                                                                         continue o;
@@ -669,6 +766,9 @@ public class CLI {
                                                                                                         System.out.println("1.back to first menu");
                                                                                                         System.out.println("0.back");
                                                                                                         String roz1 = sc.next();
+                                                                                                        if (roz1.equals("")) {
+                                                                                                            roz1 = sc.nextLine();
+                                                                                                        }
                                                                                                         if (roz1.equals("0")) {
                                                                                                             continue p;
                                                                                                         }
@@ -681,6 +781,9 @@ public class CLI {
                                                                                                             System.out.println("1.back to first menu");
                                                                                                             System.out.println("0.back");
                                                                                                             String start1 = sc.nextLine();
+                                                                                                            if (start1.equals("")) {
+                                                                                                                start1 = sc.nextLine();
+                                                                                                            }
                                                                                                             if (start1.equals("0")) {
                                                                                                                 continue q;
                                                                                                             }
@@ -693,6 +796,9 @@ public class CLI {
                                                                                                                 System.out.println("1.back to first menu");
                                                                                                                 System.out.println("0.back");
                                                                                                                 String end1 = sc.nextLine();
+                                                                                                                if (end1.equals("")) {
+                                                                                                                    end1 = sc.nextLine();
+                                                                                                                }
                                                                                                                 if (end1.equals("0")) {
                                                                                                                     continue r;
                                                                                                                 }
@@ -706,6 +812,9 @@ public class CLI {
                                                                                                                     System.out.println("3.back to first menu");
                                                                                                                     System.out.println("0.back");
                                                                                                                     String type = sc.nextLine();
+                                                                                                                    if (type.equals("")) {
+                                                                                                                        type = sc.nextLine();
+                                                                                                                    }
                                                                                                                     if (type.equals("0")) {
                                                                                                                         continue s;
                                                                                                                     }
@@ -767,6 +876,9 @@ public class CLI {
                                     System.out.println("4.Zabanha");
                                     System.out.println("0.back");
                                     String input4 = sc.nextLine();
+                                    if (input4.equals("")) {
+                                        input4 = sc.nextLine();
+                                    }
                                     if (input4.equals("0")) {
                                         continue b;
                                     }
@@ -786,6 +898,9 @@ public class CLI {
                                                 System.out.println("1.back to first menu");
                                                 System.out.println("0.back");
                                                 String input5 = sc.nextLine();
+                                                if (input5.equals("")) {
+                                                    input5 = sc.nextLine();
+                                                }
                                                 if (input5.equals("0")) {
                                                     continue c;
                                                 }
@@ -799,6 +914,9 @@ public class CLI {
                                                         System.out.println("1.back to first menu");
                                                         System.out.println("0.back");
                                                         String input6 = sc.next();
+                                                        if (input6.equals("")) {
+                                                            input6 = sc.nextLine();
+                                                        }
                                                         if (input6.equals("0")) {
                                                             continue d;
                                                         }
@@ -823,6 +941,7 @@ public class CLI {
 
                                                                         try {
                                                                             input7 = sc.nextInt();
+
                                                                         } catch (Exception e) {
                                                                             System.out.println("Enter the number");
                                                                             System.out.println();
@@ -853,8 +972,9 @@ public class CLI {
                                                                         System.out.println("1.back to first menu");
                                                                         System.out.println("0.back");
                                                                         String username = sc.nextLine();
-                                                                        if (username.equals("")){
-                                                                            username=sc.nextLine();
+
+                                                                        if (username.equals("")) {
+                                                                            username = sc.nextLine();
                                                                         }
                                                                         if (username.equals("0")) {
                                                                             continue e;
@@ -897,8 +1017,8 @@ public class CLI {
                                                                         System.out.println("1.back to first menu");
                                                                         System.out.println("0.back");
                                                                         String username = sc.nextLine();
-                                                                        if (username.equals("")){
-                                                                            username=sc.nextLine();
+                                                                        if (username.equals("")) {
+                                                                            username = sc.nextLine();
                                                                         }
                                                                         if (username.equals("0")) {
                                                                             continue e;
@@ -944,7 +1064,7 @@ public class CLI {
                                                                         System.out.println("-1.back to first menu");
                                                                         System.out.println("0.back");
                                                                         String input7 = sc.nextLine();
-                                                                        if (input7.equals("")){
+                                                                        if (input7.equals("")) {
                                                                             input7 = sc.nextLine();
                                                                         }
                                                                         if (input7.equals("-1")) {
@@ -954,7 +1074,7 @@ public class CLI {
                                                                             continue e;
                                                                         }
                                                                         if (input7.equals("2") || input7.equals("3") || input7.equals("4") || input7.equals("1")) {
-                                                                            College college2 = college.get(Integer.parseInt(input7)-1);
+                                                                            College college2 = college.get(Integer.parseInt(input7) - 1);
                                                                             g:
                                                                             while (true) {
                                                                                 System.out.println("Select Course type");
@@ -963,18 +1083,20 @@ public class CLI {
                                                                                 System.out.println("3.back to first menu");
                                                                                 System.out.println("0.back");
                                                                                 String type = sc.nextLine();
+                                                                                if (type.equals("")) {
+                                                                                    type = sc.nextLine();
+                                                                                }
                                                                                 if (type.equals("0")) {
                                                                                     continue f;
                                                                                 }
                                                                                 if (type.equals("3")) {
                                                                                     continue b;
                                                                                 }
-                                                                                if (type.equals("1") || type.equals("2")){
-                                                                                    course1.delete(course1,Integer.parseInt(type),college2);
+                                                                                if (type.equals("1") || type.equals("2")) {
+                                                                                    course1.delete(course1, Integer.parseInt(type), college2);
                                                                                     System.out.println();
                                                                                     continue b;
-                                                                                }
-                                                                                else {
+                                                                                } else {
                                                                                     System.out.println("Invalid input");
                                                                                     continue g;
 

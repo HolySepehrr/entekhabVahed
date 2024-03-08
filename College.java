@@ -35,7 +35,7 @@ public class College {
             Course course = generals.get(i);
             course.Tostring();
         }
-
+        System.out.println();
         System.out.println("professionals :");
         System.out.println();
         for (int i = 0; i < professionals.size(); i++) {
