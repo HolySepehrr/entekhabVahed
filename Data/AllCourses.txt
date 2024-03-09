@@ -1,0 +1,12 @@
+ostad arian-zaban1-1403/04/15-15:00-17:00-9896-40-3-General-shanbe_17:00_18:30@doshanbe_17:00_18:30
+iraj maleki-zaban2-1403/04/15-15:00-17:00-9897-40-3-Professional-shanbe_17:00_18:30@doshanbe_17:00_18:30
+kamali-adabiat1-1403/04/15-15:00-17:00-9856-40-3-Professional-seshanbe_12:00_14:00@yekshanbe_12:00_14:00
+moghadasi-riazi1-1403/04/03-08:00-11:00-3069-100-4-General-shanbe_08:00_10:00@doshanbe_08:00_10:00
+pornaki-riazi2-1403/04/03-08:00-11:00-3070-100-4-Professional-shanbe_15:00_17:00@doshanbe_15:00_17:00
+tofighi-bp-1403/04/10-08:00-11:00-2077-30-4-Professional-seshanbe_08:00_10:00@yekshanbe_08:00_10:00
+ali-physics2-1403/04/04-08:00-11:00-2022-100-3-Professional-shanbe_10:00_12:00@doshanbe_10:00_12:00
+pornaki-physics1-1403/04/04-08:00-11:00-2021-100-3-General-shanbe_10:00_12:00@doshanbe_10:00_12:00
+kianoosh-azphysics2-1403/04/11-08:00-11:00-1001-40-1-Professional-seshanbe_12:00_14:00@yekshanbe_12:00_14:00
+jesse-chemistry1-1403/04/05-08:00-11:00-4001-100-3-General-shanbe_08:00_10:00@doshanbe_08:00_10:00
+Heisenberg-chemistry2-1403/04/05-08:00-11:00-4002-30-3-Professional-shanbe_08:00_10:00@doshanbe_08:00_10:00
+bana-masaleh-1403/04/12-08:00-11:00-4235-30-3-Professional-seshanbe_17:00_18:00@yekshanbe_17:00_18:00

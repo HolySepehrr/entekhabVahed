@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class College {
 
-    public College( ArrayList<General> general, ArrayList<Professional> professionals , String name ){
+    public College( ArrayList<Course> general, ArrayList<Course> professionals , String name ){
         this.generals = general;
         this.professionals = professionals;
         this.name = name;
@@ -16,8 +16,8 @@ public class College {
         this.name = name;
     }
 
-    public ArrayList<General> generals;
-    public ArrayList<Professional> professionals;
+    public ArrayList<Course> generals;
+    public ArrayList<Course> professionals;
     String name;
 
     public void addcourse(Course course){

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class Course {
+class Course {
     String ostad;
     String Type;
     String dars;
@@ -35,6 +35,13 @@ abstract class Course {
     HashMap<String, LocalTime[]> time;
 
 
+    public int getCode() {
+        return code;
+    }
+
+    public int getVahed() {
+        return vahed;
+    }
 
     public void tabdil(String rooz, String shorokelas, String payankelas) {
 
@@ -44,6 +51,7 @@ abstract class Course {
 
         time.put(rooz, set);
     }
+
 
     public Course(String ostad, String dars, String tarikhemtahan, String Shorouemtahan, String Payanemtahan, int code, int zarfiat, int vahed, String type) {
         this.ostad = ostad;
@@ -112,10 +120,8 @@ abstract class Course {
     }
 
     public void delete(Course course, int type, College college) {
-        System.out.println(12418 + 1894);
         if (type == 1) {
             System.out.println();
-            System.out.println("1");
             System.out.println();
             for (int i = 0; i < course.coursesStudent.size(); ) {
                 Student student = course.coursesStudent.get(i);
@@ -129,7 +135,6 @@ abstract class Course {
             college.generals.remove(course);
         } else {
             System.out.println();
-            System.out.println("2");
             System.out.println();
             for (int i = 0; i < course.coursesStudent.size(); ) {
                 Student student = course.coursesStudent.get(i);

@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,126 +10,129 @@ public class CLI {
     ArrayList<College> college;
 
     ArrayList<Course> course;
+    Data Sharif;
 
 
-    public CLI() {
+    public CLI() throws FileNotFoundException {
         HashMap<String, LocalTime[]> Set = new HashMap<>();
-
-        General riazi1 = new General("moghadasi", "riazi1", "1403/04/03", "08:00", "11:00", 3069, 100, 4);
-        riazi1.tabdil("shanbe", "08:00", "10:00");
-        riazi1.tabdil("doshanbe", "08:00", "10:00");
-
-        Professional riazi2 = new Professional("pornaki", "riazi2", "1403/04/03", "08:00", "11:00", 3070, 100, 4);
-        riazi2.tabdil("shanbe", "15:00", "17:00");
-        riazi2.tabdil("doshanbe", "15:00", "17:00");
-
-        Professional bp = new Professional("tofighi", "bp", "1403/04/10", "08:00", "11:00", 2077, 30, 4);
-        bp.tabdil("yekshanbe", "08:00", "10:00");
-        bp.tabdil("seshanbe", "08:00", "10:00");
-
-
-        ArrayList<General> MathGenerals = new ArrayList<>();
-        ArrayList<Professional> MathProfessionals = new ArrayList<>();
-
-        MathGenerals.add(riazi1);
-        MathProfessionals.add(riazi2);
-        MathProfessionals.add(bp);
-        College Math = new College(MathGenerals, MathProfessionals, "Math");
-
-
-        Professional physics2 = new Professional("ali", "physics2", "1403/04/04", "08:00", "11:00", 2022, 100, 3);
-        physics2.tabdil("shanbe", "10:00", "12:00");
-        physics2.tabdil("doshanbe", "10:00", "12:00");
-
-        General physics1 = new General("pornaki", "physics1", "1403/04/04", "08:00", "11:00", 2021, 100, 3);
-        physics1.tabdil("shanbe", "10:00", "12:00");
-        physics1.tabdil("doshanbe", "10:00", "12:00");
-
-        Professional azphysics2 = new Professional("kianoosh", "azphysics2", "1403/04/11", "08:00", "11:00", 1001, 40, 1);
-        azphysics2.tabdil("yekshanbe", "12:00", "14:00");
-        azphysics2.tabdil("seshanbe", "12:00", "14:00");
-
-
-        ArrayList<General> PhysicsGenerals = new ArrayList<>();
-        ArrayList<Professional> PhysicsProfessionals = new ArrayList<>();
-
-        PhysicsGenerals.add(physics1);
-        PhysicsProfessionals.add(physics2);
-        PhysicsProfessionals.add(azphysics2);
-        College Physics = new College(PhysicsGenerals, PhysicsProfessionals, "Physics");
-
-
-        General chemistry1 = new General("jesse", "chemistry1", "1403/04/05", "08:00", "11:00", 4001, 100, 3);
-        chemistry1.tabdil("shanbe", "08:00", "10:00");
-        chemistry1.tabdil("doshanbe", "08:00", "10:00");
-
-        Professional chemistry2 = new Professional("Heisenberg", "chemistry2", "1403/04/05", "08:00", "11:00", 4002, 30, 3);
-        chemistry2.tabdil("shanbe", "08:00", "10:00");
-        chemistry2.tabdil("doshanbe", "08:00", "10:00");
-
-        Professional masaleh = new Professional("bana", "masaleh", "1403/04/12", "08:00", "11:00", 4235, 30, 3);
-        masaleh.tabdil("yekshanbe", "17:00", "18:00");
-        masaleh.tabdil("seshanbe", "17:00", "18:00");
-
-
-        ArrayList<General> ChemistryGenerals = new ArrayList<>();
-        ArrayList<Professional> ChemistryProfessionals = new ArrayList<>();
-
-        ChemistryGenerals.add(chemistry1);
-        ChemistryProfessionals.add(chemistry2);
-        ChemistryProfessionals.add(masaleh);
-        College Chemistry = new College(ChemistryGenerals, ChemistryProfessionals, "Chemistry");
-
-
-        General zaban1 = new General("ostad arian", "zaban1", "1403/04/15", "15:00", "17:00", 9896, 40, 3);
-        zaban1.tabdil("shanbe", "17:00", "18:30");
-        zaban1.tabdil("doshanbe", "17:00", "18:30");
-
-        Professional zaban2 = new Professional("iraj maleki", "zaban2", "1403/04/15", "15:00", "17:00", 9897, 40, 3);
-        zaban2.tabdil("shanbe", "17:00", "18:30");
-        zaban2.tabdil("doshanbe", "17:00", "18:30");
-
-        Professional adabiat2 = new Professional("kamali", "adabiat1", "1403/04/15", "15:00", "17:00", 9856, 40, 3);
-        adabiat2.tabdil("yekshanbe", "12:00", "14:00");
-        adabiat2.tabdil("seshanbe", "12:00", "14:00");
-
-
-        ArrayList<General> ZabanhaGenerals = new ArrayList<>();
-        ArrayList<Professional> ZabanhaProfessionals = new ArrayList<>();
-
-        ZabanhaGenerals.add(zaban1);
-        ZabanhaProfessionals.add(zaban2);
-        ZabanhaProfessionals.add(adabiat2);
-        College Zabanha = new College(ZabanhaGenerals, ZabanhaProfessionals, "Zabanha");
-
-
+//
+//        General riazi1 = new General("moghadasi", "riazi1", "1403/04/03", "08:00", "11:00", 3069, 100, 4);
+//        riazi1.tabdil("shanbe", "08:00", "10:00");
+//        riazi1.tabdil("doshanbe", "08:00", "10:00");
+//
+//        Professional riazi2 = new Professional("pornaki", "riazi2", "1403/04/03", "08:00", "11:00", 3070, 100, 4);
+//        riazi2.tabdil("shanbe", "15:00", "17:00");
+//        riazi2.tabdil("doshanbe", "15:00", "17:00");
+//
+//        Professional bp = new Professional("tofighi", "bp", "1403/04/10", "08:00", "11:00", 2077, 30, 4);
+//        bp.tabdil("yekshanbe", "08:00", "10:00");
+//        bp.tabdil("seshanbe", "08:00", "10:00");
+//
+//
+//        ArrayList<Course> MathGenerals = new ArrayList<>();
+//        ArrayList<Course> MathProfessionals = new ArrayList<>();
+//
+//        MathGenerals.add(riazi1);
+//        MathProfessionals.add(riazi2);
+//        MathProfessionals.add(bp);
+//        College Math = new College(MathGenerals, MathProfessionals, "Math");
+//
+//
+//        Professional physics2 = new Professional("ali", "physics2", "1403/04/04", "08:00", "11:00", 2022, 100, 3);
+//        physics2.tabdil("shanbe", "10:00", "12:00");
+//        physics2.tabdil("doshanbe", "10:00", "12:00");
+//
+//        General physics1 = new General("pornaki", "physics1", "1403/04/04", "08:00", "11:00", 2021, 100, 3);
+//        physics1.tabdil("shanbe", "10:00", "12:00");
+//        physics1.tabdil("doshanbe", "10:00", "12:00");
+//
+//        Professional azphysics2 = new Professional("kianoosh", "azphysics2", "1403/04/11", "08:00", "11:00", 1001, 40, 1);
+//        azphysics2.tabdil("yekshanbe", "12:00", "14:00");
+//        azphysics2.tabdil("seshanbe", "12:00", "14:00");
+//
+//
+//        ArrayList<Course> PhysicsGenerals = new ArrayList<>();
+//        ArrayList<Course> PhysicsProfessionals = new ArrayList<>();
+//
+//        PhysicsGenerals.add(physics1);
+//        PhysicsProfessionals.add(physics2);
+//        PhysicsProfessionals.add(azphysics2);
+//        College Physics = new College(PhysicsGenerals, PhysicsProfessionals, "Physics");
+//
+//
+//        General chemistry1 = new General("jesse", "chemistry1", "1403/04/05", "08:00", "11:00", 4001, 100, 3);
+//        chemistry1.tabdil("shanbe", "08:00", "10:00");
+//        chemistry1.tabdil("doshanbe", "08:00", "10:00");
+//
+//        Professional chemistry2 = new Professional("Heisenberg", "chemistry2", "1403/04/05", "08:00", "11:00", 4002, 30, 3);
+//        chemistry2.tabdil("shanbe", "08:00", "10:00");
+//        chemistry2.tabdil("doshanbe", "08:00", "10:00");
+//
+//        Professional masaleh = new Professional("bana", "masaleh", "1403/04/12", "08:00", "11:00", 4235, 30, 3);
+//        masaleh.tabdil("yekshanbe", "17:00", "18:00");
+//        masaleh.tabdil("seshanbe", "17:00", "18:00");
+//
+//
+//        ArrayList<Course> ChemistryGenerals = new ArrayList<>();
+//        ArrayList<Course> ChemistryProfessionals = new ArrayList<>();
+//
+//        ChemistryGenerals.add(chemistry1);
+//        ChemistryProfessionals.add(chemistry2);
+//        ChemistryProfessionals.add(masaleh);
+//        College Chemistry = new College(ChemistryGenerals, ChemistryProfessionals, "Chemistry");
+//
+//
+//        General zaban1 = new General("ostad arian", "zaban1", "1403/04/15", "15:00", "17:00", 9896, 40, 3);
+//        zaban1.tabdil("shanbe", "17:00", "18:30");
+//        zaban1.tabdil("doshanbe", "17:00", "18:30");
+//
+//        Professional zaban2 = new Professional("iraj maleki", "zaban2", "1403/04/15", "15:00", "17:00", 9897, 40, 3);
+//        zaban2.tabdil("shanbe", "17:00", "18:30");
+//        zaban2.tabdil("doshanbe", "17:00", "18:30");
+//
+//        Professional adabiat2 = new Professional("kamali", "adabiat1", "1403/04/15", "15:00", "17:00", 9856, 40, 3);
+//        adabiat2.tabdil("yekshanbe", "12:00", "14:00");
+//        adabiat2.tabdil("seshanbe", "12:00", "14:00");
+//
+//
+//        ArrayList<Course> ZabanhaGenerals = new ArrayList<>();
+//        ArrayList<Course> ZabanhaProfessionals = new ArrayList<>();
+//
+//        ZabanhaGenerals.add(zaban1);
+//        ZabanhaProfessionals.add(zaban2);
+//        ZabanhaProfessionals.add(adabiat2);
+//        College Zabanha = new College(ZabanhaGenerals, ZabanhaProfessionals, "Zabanha");
+//
+//
         Students = new ArrayList<>();
         college = new ArrayList<>();
         course = new ArrayList<>();
-
-        college.add(Math);
-        college.add(Physics);
-        college.add(Chemistry);
-        college.add(Zabanha);
-
-        course.add(zaban1);
-        course.add(zaban2);
-        course.add(adabiat2);
-
-        course.add(riazi1);
-        course.add(riazi2);
-        course.add(bp);
-
-        course.add(physics2);
-        course.add(physics1);
-        course.add(azphysics2);
-
-        course.add(chemistry1);
-        course.add(chemistry2);
-        course.add(masaleh);
+//
+//        college.add(Math);
+//        college.add(Physics);
+//        college.add(Chemistry);
+//        college.add(Zabanha);
+//
+//        course.add(zaban1);
+//        course.add(zaban2);
+//        course.add(adabiat2);
+//
+//        course.add(riazi1);
+//        course.add(riazi2);
+//        course.add(bp);
+//
+//        course.add(physics2);
+//        course.add(physics1);
+//        course.add(azphysics2);
+//
+//        course.add(chemistry1);
+//        course.add(chemistry2);
+//        course.add(masaleh);
+        Sharif = new Data();
+        Sharif.getData(Students, course, college);
     }
 
-    public void Start() {
+    public void Start() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         a:
         while (true) {
@@ -319,6 +323,8 @@ public class CLI {
                                                                 course.get(i).setTedaddaaneshjoo(r);
                                                                 course.get(i).getCoursesStudent().add(student1);
                                                                 System.out.println("Course taken successfully!");
+                                                                Sharif.setData(Students, course, college);
+
                                                                 continue e;
                                                             } else {
                                                                 System.out.println("you can't take this course!");
@@ -331,6 +337,7 @@ public class CLI {
                                                     System.out.println();
 
                                                 }
+
                                             } else if (input5.equals("4")) {
                                                 g:
                                                 while (true) {
@@ -355,6 +362,8 @@ public class CLI {
                                                             course1.coursesStudent.remove(student1);
                                                             student1.courses.remove(course1);
                                                             System.out.println("done!");
+                                                            Sharif.setData(Students, course, college);
+
                                                             continue e;
 
 
@@ -418,6 +427,10 @@ public class CLI {
                             }
                             Student student = new Student(input3, input4);
                             Students.add(student);
+                            Sharif.setData(Students, course, college);
+                            System.out.println("Student added successfully!");
+                            System.out.println();
+
                             a = true;
                             continue b;
                         }
@@ -560,7 +573,7 @@ public class CLI {
                                                                         zarfiat = sc.nextInt();
                                                                     } catch (Exception e) {
                                                                         System.out.println("Enter a number");
-                                                                        continue i ;
+                                                                        continue i;
                                                                     }
                                                                     if (zarfiat == 0) {
                                                                         continue h;
@@ -692,6 +705,7 @@ public class CLI {
                                                                                                             name.tabdil(roz, start, end);
                                                                                                             course.add(name);
                                                                                                             college1.generals.add(name);
+                                                                                                            Sharif.setData(Students,course,college);
                                                                                                             System.out.println("Add course completed");
                                                                                                             System.out.println("Course's code is :\"" + code + "\"");
 
@@ -701,6 +715,7 @@ public class CLI {
                                                                                                             name.tabdil(roz, start, end);
                                                                                                             course.add(name);
                                                                                                             college1.professionals.add(name);
+                                                                                                            Sharif.setData(Students,course,college);
                                                                                                             System.out.println("Add course completed");
                                                                                                             System.out.println("Course's code is :\"" + code + "\"");
                                                                                                             continue b;
@@ -827,6 +842,7 @@ public class CLI {
                                                                                                                         name.tabdil(roz1, start1, end1);
                                                                                                                         course.add(name);
                                                                                                                         college1.generals.add(name);
+                                                                                                                        Sharif.setData(Students,course,college);
 
                                                                                                                         System.out.println("Add course complited");
                                                                                                                         System.out.println("Course's code is :\"" + code + "\"");
@@ -838,6 +854,7 @@ public class CLI {
                                                                                                                         name.tabdil(roz1, start1, end1);
                                                                                                                         course.add(name);
                                                                                                                         college1.professionals.add(name);
+                                                                                                                        Sharif.setData(Students,course,college);
 
                                                                                                                         System.out.println("Add course completed");
                                                                                                                         System.out.println("Course's code is :\"" + code + "\"");
@@ -956,6 +973,7 @@ public class CLI {
                                                                         System.out.println();
                                                                         System.out.println("Capacity added");
                                                                         course1.setZarfiat(course1.getZarfiat() + input7);
+                                                                        Sharif.setData(Students,course,college);
                                                                         System.out.println("Course lesson new capacity: \"" + course1.zarfiat + "\"");
                                                                         System.out.println();
                                                                         continue b;
@@ -996,6 +1014,7 @@ public class CLI {
                                                                                     student.setGeneralvahed(f);
                                                                                 }
                                                                                 course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() - 1);
+                                                                                Sharif.setData(Students,course,college);
                                                                                 System.out.println("done!");
                                                                                 System.out.println();
                                                                                 continue b;
@@ -1040,6 +1059,7 @@ public class CLI {
                                                                                 }
                                                                                 course1.setTedaddaaneshjoo(course1.getTedaddaaneshjoo() + 1);
                                                                                 course1.coursesStudent.add(student1);
+                                                                                Sharif.setData(Students,course,college);
                                                                                 System.out.println("done!");
                                                                                 System.out.println();
                                                                                 continue b;
@@ -1094,6 +1114,8 @@ public class CLI {
                                                                                 }
                                                                                 if (type.equals("1") || type.equals("2")) {
                                                                                     course1.delete(course1, Integer.parseInt(type), college2);
+                                                                                    Sharif.setData(Students,course,college);
+                                                                                    System.out.println("done!");
                                                                                     System.out.println();
                                                                                     continue b;
                                                                                 } else {
